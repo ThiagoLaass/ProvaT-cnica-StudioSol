@@ -16,9 +16,9 @@ public class Placar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer pointsTime1;
+    private Integer pontosTime1;
 
-    private Integer pointsTime2;
+    private Integer pontosTime2;
 
     private Integer possibilities;
 }
