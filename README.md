@@ -1,1 +1,1 @@
-# ProvaT-cnica-StudioSol
+# ProvaTécnica-StudioSol
