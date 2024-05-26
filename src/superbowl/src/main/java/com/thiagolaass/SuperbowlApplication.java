@@ -1,4 +1,4 @@
-package com.thiagolaass.superbowl;
+package com.thiagolaass;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

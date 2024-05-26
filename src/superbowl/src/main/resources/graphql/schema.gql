@@ -1,6 +1,0 @@
-type Query {
-  calculatePossibleCombinations(homeScore: Int!, awayScore: Int!): Int!
-}
-type Mutation {
-  calculatePossibleCombinations(homeScore: Int!, awayScore: Int!): Int!
-}
