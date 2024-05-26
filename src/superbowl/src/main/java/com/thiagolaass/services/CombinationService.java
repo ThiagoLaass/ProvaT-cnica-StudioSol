@@ -9,14 +9,23 @@ public class CombinationService {
 
     public int calculatePossibleCombinations(Placar placar) {
         int combinations = 0;
-        for (int touchdowns = 0; touchdowns <= Math.min(placar.getPontosTime1() / 6, placar.getPontosTime2() / 6); touchdowns++) {
+        int maxTouchdowns = Math.min(placar.getPontosTime1() / 6, placar.getPontosTime2() / 6);
+
+        for (int touchdowns = maxTouchdowns; touchdowns >= 0; touchdowns--) {
             int remainingTime1Score = placar.getPontosTime1() - touchdowns * 6;
             int remainingTime2Score = placar.getPontosTime2() - touchdowns * 6;
-            if (remainingTime1Score % 3 == 0 && remainingTime2Score % 3 == 0) {
-                combinations++;
+
+            for (int extraPoints1 = 0; extraPoints1 <= 2; extraPoints1++) {
+                for (int extraPoints2 = 0; extraPoints2 <= 2; extraPoints2++) {
+                    int adjustedRemaining1 = remainingTime1Score - extraPoints1;
+                    int adjustedRemaining2 = remainingTime2Score - extraPoints2;
+                    if (adjustedRemaining1 >= 0 && adjustedRemaining2 >= 0
+                            && adjustedRemaining1 % 3 == 0 && adjustedRemaining2 % 3 == 0) {
+                        combinations++;
+                    }
+                }
             }
         }
         return combinations;
     }
 }
-
