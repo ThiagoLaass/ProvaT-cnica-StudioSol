@@ -28,7 +28,7 @@ public class CombinationController {
     
     @PostMapping("/verify")
     public ResponseEntity<?> calculatePossibleCombinations(@RequestBody @Valid Placar placar) {
-        int combinations = combinationService.calculatePossibleCombinations(placar);
+        var combinations = combinationService.calculatePossibleCombinations(placar);
         return ResponseEntity.ok(new CombinanationResponseDTO(combinations));
     }
 }

@@ -17,10 +17,12 @@ public class CombinationService {
 
             for (int extraPoints1 = 0; extraPoints1 <= 2; extraPoints1++) {
                 for (int extraPoints2 = 0; extraPoints2 <= 2; extraPoints2++) {
-                    int adjustedRemaining1 = remainingTime1Score - extraPoints1;
-                    int adjustedRemaining2 = remainingTime2Score - extraPoints2;
-                    if (adjustedRemaining1 >= 0 && adjustedRemaining2 >= 0
-                            && adjustedRemaining1 % 3 == 0 && adjustedRemaining2 % 3 == 0) {
+                    int remainingFieldGoals1 = (remainingTime1Score - extraPoints1) / 3;
+                    int remainingFieldGoals2 = (remainingTime2Score - extraPoints2) / 3;
+
+                    if (remainingFieldGoals1 >= 0 && remainingFieldGoals2 >= 0
+                            && (remainingTime1Score - extraPoints1) % 3 == 0
+                            && (remainingTime2Score - extraPoints2) % 3 == 0) {
                         combinations++;
                     }
                 }
