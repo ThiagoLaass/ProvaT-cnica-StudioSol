@@ -19,6 +19,7 @@ public class SecurityConfigurations {
             .authorizeHttpRequests(authorize -> authorize.
             requestMatchers(HttpMethod.GET, "/").permitAll()
                     .requestMatchers(HttpMethod.POST, "/verify").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/static/**").permitAll()
             )
             .csrf(csrf -> csrf.ignoringRequestMatchers("/**"))
             

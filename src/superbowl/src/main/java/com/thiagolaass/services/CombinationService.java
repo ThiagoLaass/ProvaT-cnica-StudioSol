@@ -1,5 +1,8 @@
 package com.thiagolaass.services;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.thiagolaass.models.Placar;
@@ -8,26 +11,25 @@ import com.thiagolaass.models.Placar;
 public class CombinationService {
 
     public int calculatePossibleCombinations(Placar placar) {
-        int combinations = 0;
-        int maxTouchdowns = Math.min(placar.getPontosTime1() / 6, placar.getPontosTime2() / 6);
+        int combinations1 = calculateCombinations(placar.getPontosTime1());
+        int combinations2 = calculateCombinations(placar.getPontosTime2());
 
-        for (int touchdowns = maxTouchdowns; touchdowns >= 0; touchdowns--) {
-            int remainingTime1Score = placar.getPontosTime1() - touchdowns * 6;
-            int remainingTime2Score = placar.getPontosTime2() - touchdowns * 6;
+        return combinations1 * combinations2;
+    }
+        private static int calculateCombinations(int score) {
+        int[] scores = {3, 6, 7, 8};
+        Map<Integer, Integer> dp = new HashMap<>();
+        dp.put(0, 1);
 
-            for (int extraPoints1 = 0; extraPoints1 <= 2; extraPoints1++) {
-                for (int extraPoints2 = 0; extraPoints2 <= 2; extraPoints2++) {
-                    int remainingFieldGoals1 = (remainingTime1Score - extraPoints1) / 3;
-                    int remainingFieldGoals2 = (remainingTime2Score - extraPoints2) / 3;
-
-                    if (remainingFieldGoals1 >= 0 && remainingFieldGoals2 >= 0
-                            && (remainingTime1Score - extraPoints1) % 3 == 0
-                            && (remainingTime2Score - extraPoints2) % 3 == 0) {
-                        combinations++;
-                    }
+        for (int i = 1; i <= score; i++) {
+            dp.put(i, 0);
+            for (int s : scores) {
+                if (i >= s) {
+                    dp.put(i, dp.get(i) + dp.getOrDefault(i - s, 0));
                 }
             }
         }
-        return combinations;
+        return dp.get(score);
     }
+
 }
