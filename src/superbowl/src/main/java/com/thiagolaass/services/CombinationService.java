@@ -10,10 +10,8 @@ public class CombinationService {
     public int calculatePossibleCombinations(Placar placar) {
         return calculateCombinations(placar.getPontosTime1()) * calculateCombinations(placar.getPontosTime2());
     }
-
-    // Função para verificar se um placar é válido
     
-    // Função para calcular o número de combinações para um placar específico
+    // Método para calcular o número de combinações para um placar específico
     public static int calculateCombinations(int score) {
         int combinations = 0;
 
@@ -33,7 +31,6 @@ public class CombinationService {
                 }
             }
         }
-    
         return combinations;
     }
-    }
+}
