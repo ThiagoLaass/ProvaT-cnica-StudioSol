@@ -8,29 +8,26 @@ import com.thiagolaass.models.Placar;
 public class CombinationService {
 
     public int calculatePossibleCombinations(Placar placar) {
-        return calculateCombinations(placar.getPontosTime1()) * calculateCombinations(placar.getPontosTime2());
+        return calcularCombinacoes(placar.getPontosTime1(), placar.getPontosTime2());
     }
     
     // Método para calcular o número de combinações para um placar específico
-    public static int calculateCombinations(int score) {
-        int combinations = 0;
+    public  int calcularCombinacoes(int placarA, int placarB) {
+        int[] pontos = {6, 3}; // Touchdown e Field Goal
+        int maxPlacar = Math.max(placarA, placarB);
+        int[] dp = new int[maxPlacar + 1];
+        dp[0] = 1; // A única maneira de fazer 0 pontos é não fazer nada
 
-        // Calcula o número de touchdowns possíveis
-        for (int touchdowns = 0; touchdowns <= score / 6; touchdowns++) {
-            // Calcula o placar restante após marcar touchdowns
-            int remainingScore = score - touchdowns * 6;
-    
-            // Calcula o número de field goals possíveis para o placar restante
-            for (int fieldGoals = 0; fieldGoals <= remainingScore / 3; fieldGoals++) {
-                // Calcula o placar restante após marcar field goals
-                int remainingScoreAfterFieldGoals = remainingScore - fieldGoals * 3;
-    
-                // Se o placar restante for zero, encontramos uma combinação válida
-                if (remainingScoreAfterFieldGoals == 0) {
-                    combinations++;
-                }
+        // Para cada tipo de ponto
+        for (int ponto : pontos) {
+            // Para cada possível pontuação até o placar máximo
+            for (int i = ponto; i <= maxPlacar; i++) {
+                // O número de combinações possíveis até agora é a soma do número de combinações
+                // até i menos o ponto atual e o número de combinações para i com o ponto atual
+                dp[i] += dp[i - ponto];
             }
         }
-        return combinations;
+
+        return dp[placarA] + dp[placarB];
     }
 }
