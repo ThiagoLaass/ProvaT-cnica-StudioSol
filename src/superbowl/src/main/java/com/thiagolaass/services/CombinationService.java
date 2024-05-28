@@ -1,8 +1,5 @@
 package com.thiagolaass.services;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.stereotype.Service;
 
 import com.thiagolaass.models.Placar;
@@ -11,25 +8,32 @@ import com.thiagolaass.models.Placar;
 public class CombinationService {
 
     public int calculatePossibleCombinations(Placar placar) {
-        int combinations1 = calculateCombinations(placar.getPontosTime1());
-        int combinations2 = calculateCombinations(placar.getPontosTime2());
-
-        return combinations1 * combinations2;
+        return calculateCombinations(placar.getPontosTime1()) * calculateCombinations(placar.getPontosTime2());
     }
-        private static int calculateCombinations(int score) {
-        int[] scores = {3, 6, 7, 8};
-        Map<Integer, Integer> dp = new HashMap<>();
-        dp.put(0, 1);
 
-        for (int i = 1; i <= score; i++) {
-            dp.put(i, 0);
-            for (int s : scores) {
-                if (i >= s) {
-                    dp.put(i, dp.get(i) + dp.getOrDefault(i - s, 0));
+    // Função para verificar se um placar é válido
+    
+    // Função para calcular o número de combinações para um placar específico
+    public static int calculateCombinations(int score) {
+        int combinations = 0;
+
+        // Calcula o número de touchdowns possíveis
+        for (int touchdowns = 0; touchdowns <= score / 6; touchdowns++) {
+            // Calcula o placar restante após marcar touchdowns
+            int remainingScore = score - touchdowns * 6;
+    
+            // Calcula o número de field goals possíveis para o placar restante
+            for (int fieldGoals = 0; fieldGoals <= remainingScore / 3; fieldGoals++) {
+                // Calcula o placar restante após marcar field goals
+                int remainingScoreAfterFieldGoals = remainingScore - fieldGoals * 3;
+    
+                // Se o placar restante for zero, encontramos uma combinação válida
+                if (remainingScoreAfterFieldGoals == 0) {
+                    combinations++;
                 }
             }
         }
-        return dp.get(score);
+    
+        return combinations;
     }
-
-}
+    }

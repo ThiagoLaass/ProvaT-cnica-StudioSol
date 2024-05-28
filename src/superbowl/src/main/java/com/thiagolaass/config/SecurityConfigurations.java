@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@SuppressWarnings("neveruse")
 public class SecurityConfigurations {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -19,6 +20,7 @@ public class SecurityConfigurations {
             .authorizeHttpRequests(authorize -> authorize.
             requestMatchers(HttpMethod.GET, "/").permitAll()
                     .requestMatchers(HttpMethod.POST, "/verify").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/verify").permitAll()
                     .requestMatchers(HttpMethod.GET, "/static/**").permitAll()
             )
             .csrf(csrf -> csrf.ignoringRequestMatchers("/**"))

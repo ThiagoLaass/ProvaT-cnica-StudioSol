@@ -3,12 +3,10 @@ package com.thiagolaass.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.thiagolaass.dto.CombinanationResponseDTO;
 import com.thiagolaass.models.Placar;
@@ -24,11 +22,6 @@ public class CombinationController {
     @Autowired
     private CombinationService combinationService;
 
-    @GetMapping
-    public ModelAndView modelAndView(){
-        return new ModelAndView("index.html");
-    }
-    
     @PostMapping("/verify")
     public ResponseEntity<?> calculatePossibleCombinations(@RequestBody @Valid Placar placar) {
         var combinations = combinationService.calculatePossibleCombinations(placar);

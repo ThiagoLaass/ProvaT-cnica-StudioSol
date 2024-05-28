@@ -9,16 +9,15 @@ document.getElementById('scoreForm').addEventListener('submit', async (event) =>
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ pontosTime1, pontosTime2})
+        body: JSON.stringify({ pontosTime1, pontosTime2 })
     });
 
     if (!response.ok) {
         console.error('Network response was not ok', response);
         return;
     }
-
     const result = await response.json();
-    console.log(result);
+    console.log(result)
     displayResult(result);
 });
 
