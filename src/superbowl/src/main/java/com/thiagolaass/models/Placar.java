@@ -19,6 +19,4 @@ public class Placar {
     private Integer pontosTime1;
 
     private Integer pontosTime2;
-
-    private Integer possibilities;
 }
